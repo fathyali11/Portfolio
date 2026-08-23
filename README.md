@@ -11,7 +11,7 @@ Visit my portfolio at: **[https://fathyali11.github.io/Portfolio/](https://fathy
 ## Download My CV
 [Download CV (PDF)](https://github.com/fathyali11/Portfolio/blob/main/Fathy_Ali_DotNet_Developer.pdf)
 
-## 🛠️ Tech Stack
+##  Tech Stack
 - **Backend:** ASP.NET Core, Web API, SignalR
 - **Frontend:** Angular, Blazor 
 - **Database:** SQL Server, PostgreSQL
