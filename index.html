@@ -11,9 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6366f1', // Indigo
-                        secondary: '#8b5cf6', // Violet
-                        dark: '#0f172a', // Slate 900
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        dark: '#0f172a',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -40,12 +40,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1e293b; }
         ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
 
-        /* Glassmorphism */
         .glass {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(10px);
@@ -53,14 +51,12 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Gradient Text */
         .gradient-text {
             background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Scroll Animations */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -71,7 +67,6 @@
             transform: translateY(0);
         }
 
-        /* Typing Cursor */
         .typing-cursor {
             display: inline-block;
             width: 3px;
@@ -83,7 +78,6 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Card Hover Effect */
         .project-card {
             transition: all 0.4s ease;
         }
@@ -92,7 +86,6 @@
             box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
         }
         
-        /* Background Mesh */
         .bg-mesh {
             background-image: 
                 radial-gradient(at 20% 30%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
@@ -178,7 +171,6 @@
         <div class="max-w-6xl mx-auto">
             <h2 class="text-4xl font-bold text-center mb-16 reveal">My <span class="gradient-text">Tech Stack</span></h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Backend -->
                 <div class="glass p-8 rounded-2xl reveal hover:border-primary transition">
                     <div class="text-4xl text-primary mb-4"><i class="fas fa-server"></i></div>
                     <h3 class="text-xl font-bold mb-4 text-white">Backend</h3>
@@ -189,7 +181,6 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> Clean Arch & CQRS</li>
                     </ul>
                 </div>
-                <!-- Frontend -->
                 <div class="glass p-8 rounded-2xl reveal hover:border-secondary transition">
                     <div class="text-4xl text-secondary mb-4"><i class="fas fa-laptop-code"></i></div>
                     <h3 class="text-xl font-bold mb-4 text-white">Frontend</h3>
@@ -200,7 +191,6 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> HTML5 / CSS3</li>
                     </ul>
                 </div>
-                <!-- Cloud & DB -->
                 <div class="glass p-8 rounded-2xl reveal hover:border-pink-500 transition">
                     <div class="text-4xl text-pink-500 mb-4"><i class="fas fa-cloud"></i></div>
                     <h3 class="text-xl font-bold mb-4 text-white">Cloud & Database</h3>
