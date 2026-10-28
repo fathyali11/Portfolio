@@ -1,373 +1,804 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fathy Ali | Full-Stack .NET Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        secondary: '#8b5cf6',
-                        dark: '#0f172a',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px #6366f1, 0 0 10px #6366f1' },
-                            '100%': { boxShadow: '0 0 20px #8b5cf6, 0 0 30px #8b5cf6' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #0f172a;
-            color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fathy Ali — Full-Stack .NET Developer</title>
+<style>
+  /* ============ ZERO-DEPENDENCY PORTFOLIO — ALL STYLES INLINE ============ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .glass {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+  :root {
+    --purple: #7c3aed;
+    --cyan: #06b6d4;
+    --bg: #06060e;
+    --card: rgba(255,255,255,0.03);
+    --border: rgba(124,58,237,0.25);
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+  }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  html { scroll-behavior: smooth; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Inter', -apple-system, Roboto, Arial, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
 
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1em;
-            background-color: #8b5cf6;
-            margin-left: 5px;
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0a0a14; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--purple), var(--cyan)); border-radius: 10px; }
+  ::selection { background: var(--purple); color: #fff; }
 
-        .project-card {
-            transition: all 0.4s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
-        }
-        
-        .bg-mesh {
-            background-image: 
-                radial-gradient(at 20% 30%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                radial-gradient(at 80% 70%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
-        }
-    </style>
+  a { color: inherit; text-decoration: none; }
+
+  .mono { font-family: 'Consolas', 'Courier New', monospace; }
+
+  /* ===== Animated background blobs ===== */
+  .bg-fixed { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(120px); opacity: 0.35;
+    animation: blobFloat 18s ease-in-out infinite;
+  }
+  .blob-1 { width: 500px; height: 500px; background: var(--purple); top: -100px; left: -100px; }
+  .blob-2 { width: 400px; height: 400px; background: var(--cyan); top: 40%; right: -100px; animation-delay: -6s; }
+  .blob-3 { width: 350px; height: 350px; background: #8b5cf6; bottom: -80px; left: 30%; animation-delay: -12s; }
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(80px,-60px) scale(1.15); }
+    66% { transform: translate(-60px,40px) scale(0.9); }
+  }
+  .grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove { to { background-position: 50px 50px; } }
+
+  #particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+  /* ===== Gradient text ===== */
+  .gradient-text {
+    background: linear-gradient(90deg, var(--purple), var(--cyan), var(--purple));
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: textShine 4s linear infinite;
+  }
+  @keyframes textShine { to { background-position: 200% center; } }
+
+  /* ===== Cursor blink ===== */
+  .cursor-blink {
+    display: inline-block; width: 3px; height: 1em;
+    background: var(--cyan); vertical-align: text-bottom;
+    animation: blink 0.8s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ===== Float ===== */
+  .float { animation: floatY 4s ease-in-out infinite; }
+  @keyframes floatY { 50% { transform: translateY(-18px); } }
+
+  /* ===== Pulse dot ===== */
+  .pulse-dot { animation: pulseDot 2s infinite; }
+  @keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(124,58,237,0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(124,58,237,0); }
+    100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+  }
+
+  /* ===== Scroll-reveal ===== */
+  .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.left { transform: translateX(-60px); }
+  .reveal.right { transform: translateX(60px); }
+  .reveal.zoom { transform: scale(0.85); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ===== Cards ===== */
+  .glow-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s, border-color 0.4s;
+  }
+  .glow-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(6,182,212,0.5);
+    box-shadow: 0 20px 60px -15px rgba(124,58,237,0.4);
+  }
+  .tilt-card { transform-style: preserve-3d; will-change: transform; }
+
+  /* ===== Skill chips ===== */
+  .chip {
+    display: inline-block; padding: 8px 18px; border-radius: 999px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    font-size: 0.85rem; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .chip:hover {
+    transform: translateY(-5px) scale(1.08) rotate(-2deg);
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    box-shadow: 0 10px 30px -5px rgba(124,58,237,0.5);
+    color: #fff;
+  }
+
+  /* ===== Progress bars ===== */
+  .bar-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; }
+  .bar-fill {
+    height: 100%; width: 0; border-radius: 999px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    position: relative; overflow: hidden;
+    transition: width 1.6s cubic-bezier(0.22,1,0.36,1);
+  }
+  .bar-fill::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 999px; font-weight: 700;
+    transition: all 0.4s; cursor: pointer;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    background-size: 200% auto; color: #fff; border: none;
+  }
+  .btn-primary:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 15px 40px -10px rgba(124,58,237,0.6); }
+  .btn-outline { border: 2px solid var(--border); color: var(--text); background: transparent; }
+  .btn-outline:hover { background: rgba(124,58,237,0.2); transform: translateY(-3px); }
+  .btn-sm { padding: 10px 20px; font-size: 0.85rem; }
+
+  /* ===== Nav ===== */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 50;
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    background: rgba(6,6,14,0.78); border-bottom: 1px solid rgba(124,58,237,0.1);
+    animation: fadeDown 0.8s ease both;
+  }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-30px); } }
+  .nav-inner { max-width: 1150px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-links { display: flex; gap: 30px; font-size: 0.9rem; }
+  .nav-links a { color: var(--muted); transition: color 0.3s, transform 0.3s; display: inline-block; }
+  .nav-links a:hover { color: var(--cyan); transform: translateY(-3px); }
+  .logo { font-weight: 800; font-size: 1.25rem; }
+  #menuBtn { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+  #mobileMenu { display: none; flex-direction: column; padding: 0 24px 16px; }
+  #mobileMenu a { padding: 10px 0; color: var(--muted); }
+
+  /* ===== Sections ===== */
+  section { position: relative; z-index: 1; padding: 100px 24px; }
+  .container { max-width: 1150px; margin: 0 auto; }
+  .section-tag { font-family: monospace; color: var(--cyan); font-size: 0.9rem; }
+  .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-top: 10px; }
+  .section-head { text-align: center; margin-bottom: 60px; }
+
+  /* ===== Hero ===== */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; }
+  .hero-inner { max-width: 900px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 20px; border-radius: 999px; font-size: 0.85rem;
+    border: 1px solid rgba(6,182,212,0.4); background: rgba(6,182,212,0.1); color: #67e8f9;
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both 0.2s;
+  }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); animation: blink 1.2s infinite; }
+  @keyframes popIn { from { transform: scale(0) rotate(-8deg); opacity: 0; } }
+  .hero h1 { font-size: clamp(3rem, 10vw, 6.5rem); font-weight: 900; margin: 24px 0 16px; line-height: 1.1; }
+  .hero h1 .letter { display: inline-block; transform: translateY(120%); opacity: 0; animation: letterUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+  @keyframes letterUp { to { transform: translateY(0); opacity: 1; } }
+  .type-line { font-family: monospace; font-size: clamp(1.1rem, 3vw, 1.6rem); color: var(--muted); height: 2.4em; }
+  .type-line .prompt { color: var(--purple); }
+  .hero p.desc { color: var(--muted); max-width: 640px; margin: 20px auto 36px; font-size: 1.1rem; }
+  .accent-p { color: #a78bfa; font-weight: 600; }
+  .accent-c { color: #22d3ee; font-weight: 600; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .socials { display: flex; gap: 24px; justify-content: center; margin-top: 40px; font-size: 1.5rem; }
+  .socials a { color: var(--muted); transition: color 0.3s, transform 0.3s; }
+  .socials a:hover { color: var(--cyan); transform: scale(1.3) rotate(-6deg); }
+
+  .scroll-mouse {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    width: 26px; height: 42px; border: 2px solid rgba(255,255,255,0.35); border-radius: 14px;
+    animation: fadeIn 1s ease 2s both;
+  }
+  .scroll-mouse::after {
+    content: ''; position: absolute; top: 8px; left: 50%; margin-left: -2px;
+    width: 4px; height: 8px; background: var(--cyan); border-radius: 4px;
+    animation: scrollWheel 1.8s infinite;
+  }
+  @keyframes scrollWheel { to { transform: translateY(14px); opacity: 0; } }
+  @keyframes fadeIn { from { opacity: 0; } }
+
+  /* ===== About ===== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .code-card { position: relative; border-radius: 24px; padding: 28px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); font-family: monospace; font-size: 0.9rem; line-height: 1.9; }
+  .code-card::before {
+    content: ''; position: absolute; inset: -16px; z-index: -1; border-radius: 32px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3)); filter: blur(24px);
+  }
+  .term-dots { display: flex; gap: 8px; margin-bottom: 16px; }
+  .term-dots span { width: 12px; height: 12px; border-radius: 50%; }
+  .td-r { background: #ef4444; } .td-y { background: #eab308; } .td-g { background: #22c55e; }
+  .c-purple { color: #c4b5fd; } .c-cyan { color: #67e8f9; } .c-green { color: #86efac; } .c-yellow { color: #fde047; }
+  .about-text { color: var(--muted); font-size: 1.05rem; }
+  .about-text p + p { margin-top: 16px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .stat { text-align: center; padding: 18px 8px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); transition: border-color 0.3s, transform 0.3s; }
+  .stat:hover { border-color: rgba(6,182,212,0.5); transform: translateY(-4px); }
+  .stat .num { font-size: 1.8rem; font-weight: 900; }
+  .stat .num.p { color: var(--purple); } .stat .num.c { color: var(--cyan); }
+  .stat .lbl { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+
+  /* ===== Skills ===== */
+  .skill-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 56px; }
+  .skill-bar-row .top { display: flex; justify-content: space-between; font-family: monospace; font-size: 0.85rem; margin-bottom: 8px; }
+  .pct { color: var(--purple); }
+  .skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+  .skill-item { text-align: center; padding: 24px 12px; }
+  .skill-item .icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+  .skill-item .sub { font-size: 0.72rem; color: var(--muted); font-family: monospace; margin-top: 4px; }
+  .ip { color: #a78bfa; } .ic { color: #22d3ee; } .ir { color: #f87171; } .ib { color: #60a5fa; } .io { color: #fb923c; } .iy { color: #fde047; } .ig { color: #4ade80; }
+  .chips-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  /* ===== Projects ===== */
+  .project { padding: 40px; margin-bottom: 40px; }
+  .project h3 { font-size: 1.5rem; margin: 12px 0; }
+  .proj-head { display: flex; align-items: center; gap: 14px; }
+  .proj-head .icon { font-size: 1.8rem; }
+  .project p { color: var(--muted); margin-bottom: 20px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .tag { padding: 4px 12px; border-radius: 999px; font-family: monospace; font-size: 0.72rem; }
+  .tag.p { background: rgba(124,58,237,0.2); color: #c4b5fd; }
+  .tag.c { background: rgba(6,182,212,0.2); color: #67e8f9; }
+  .proj-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .proj-icon-wrap { display: flex; justify-content: center; position: relative; }
+  .proj-icon-wrap .big-icon { font-size: 9rem; color: rgba(255,255,255,0.08); }
+  .proj-icon-wrap::before {
+    content: ''; position: absolute; inset: -20px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(6,182,212,0.25));
+    filter: blur(30px); animation: glowPulse 3s ease-in-out infinite;
+  }
+  @keyframes glowPulse { 50% { opacity: 0.5; transform: scale(0.9); } }
+  .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 999px; background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.5); color: #4ade80; font-weight: 700; font-size: 0.85rem; }
+
+  /* ===== Experience ===== */
+  .timeline { position: relative; border-left: 2px solid var(--border); margin-left: 8px; padding-left: 36px; }
+  .tl-item { position: relative; margin-bottom: 44px; }
+  .tl-dot { position: absolute; left: -45px; top: 8px; width: 16px; height: 16px; border-radius: 50%; }
+  .tl-dot.purple { background: var(--purple); box-shadow: 0 0 0 0 rgba(124,58,237,0.7); animation: pulseDot 2s infinite; }
+  .tl-dot.cyan { background: var(--cyan); }
+  .tl-card { padding: 24px 28px; }
+  .tl-top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .tl-top h3 { font-size: 1.15rem; }
+  .date-pill { padding: 3px 12px; border-radius: 999px; background: rgba(6,182,212,0.15); color: #67e8f9; font-family: monospace; font-size: 0.72rem; }
+  .tl-place { color: var(--purple); font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; }
+  .tl-card p { color: var(--muted); font-size: 0.95rem; }
+  .honors { color: #4ade80; font-weight: 600; }
+  .extras { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 40px; }
+  .extra-card { display: flex; align-items: center; gap: 14px; padding: 16px 24px; }
+  .extra-card .icon { font-size: 1.6rem; }
+  .extra-card .t1 { font-weight: 600; font-size: 0.9rem; }
+  .extra-card .t2 { font-size: 0.75rem; color: var(--muted); font-family: monospace; }
+
+  /* ===== Contact ===== */
+  .contact-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 40px 0; }
+  .contact-pill { display: flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; font-family: monospace; font-size: 0.85rem; transition: transform 0.3s; }
+  a.contact-pill:hover { transform: scale(1.06); }
+  .contact-socials { display: flex; justify-content: center; gap: 16px; }
+  .soc {
+    width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .soc:hover { transform: scale(1.15) rotate(-6deg); color: var(--cyan); border-color: rgba(6,182,212,0.5); }
+
+  /* ===== Big email ===== */
+  .email-big {
+    display: inline-block;
+    font-size: clamp(1.15rem, 4.5vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan), var(--purple));
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: textShine 4s linear infinite;
+    border-bottom: 2px solid rgba(6,182,212,0.4);
+    padding-bottom: 6px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .email-big:hover { transform: scale(1.05); border-color: var(--cyan); }
+
+  /* ===== Footer ===== */
+  footer { border-top: 1px solid rgba(124,58,237,0.1); padding: 32px 24px; position: relative; z-index: 1; }
+  .footer-inner { max-width: 1150px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: monospace; font-size: 0.85rem; color: var(--muted); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+    #menuBtn { display: block; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .skill-bars { grid-template-columns: 1fr; }
+    .skill-grid { grid-template-columns: repeat(2, 1fr); }
+    .project { padding: 28px; }
+    .proj-icon-wrap { display: none; }
+    section { padding: 70px 20px; }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+<base target="_blank">
 </head>
-<body class="bg-mesh">
+<body>
 
-    <nav class="fixed w-full z-50 glass top-0 left-0">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold gradient-text">Fathy</a>
-            <div class="hidden md:flex space-x-8 text-slate-300 font-medium">
-                <a href="#home" class="hover:text-primary transition">Home</a>
-                <a href="#about" class="hover:text-primary transition">About</a>
-                <a href="#skills" class="hover:text-primary transition">Skills</a>
-                <a href="#projects" class="hover:text-primary transition">Projects</a>
-                <a href="#contact" class="hover:text-primary transition">Contact</a>
-            </div>
-            <a href="#contact" class="px-5 py-2 bg-primary hover:bg-secondary rounded-full text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-primary/30">Hire Me</a>
+<!-- Background -->
+<div class="bg-fixed">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="grid-overlay"></div>
+</div>
+<canvas id="particles"></canvas>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="logo mono gradient-text">&lt;Fathy /&gt;</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button id="menuBtn" aria-label="menu">☰</button>
+  </div>
+  <div id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="badge mono"><span class="dot"></span> Available for new opportunities</div>
+    <h1 id="heroName"></h1>
+    <div class="type-line"><span class="prompt">&gt;</span> <span id="typewriter"></span><span class="cursor-blink"></span></div>
+    <p class="desc">
+      Building production-grade web applications with
+      <span class="accent-p">ASP.NET Core</span>, <span class="accent-c">Angular</span> &amp;
+      <span class="accent-p">Blazor</span>. Passionate about Clean Architecture, Microservices &amp; Real-Time Systems.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View My Work →</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/fathyali11" target="_blank" title="GitHub">⌥</a>
+      <a href="https://linkedin.com/in/fathy-ali-fullstack" target="_blank" title="LinkedIn">in</a>
+      <a href="/cdn-cgi/l/email-protection#5d3b3c293524733c3134653c31347b7e6b69663a303c3431733e3230" title="Email">✉</a>
+    </div>
+  </div>
+  <div class="scroll-mouse"></div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">// 01. About Me</span>
+      <h2 class="section-title gradient-text">Who Am I?</h2>
+    </div>
+    <div class="grid-2">
+      <div class="reveal left">
+        <div class="float">
+          <div class="code-card">
+            <div class="term-dots"><span class="td-r"></span><span class="td-y"></span><span class="td-g"></span></div>
+            <span class="c-purple">const</span> <span class="c-cyan">developer</span> = {<br>
+            &nbsp;&nbsp;name: <span class="c-green">"Fathy Ali"</span>,<br>
+            &nbsp;&nbsp;role: <span class="c-green">"Full-Stack .NET Developer"</span>,<br>
+            &nbsp;&nbsp;location: <span class="c-green">"Mansoura, Egypt"</span>,<br>
+            &nbsp;&nbsp;passions: [<span class="c-green">"Clean Architecture"</span>, <span class="c-green">"Microservices"</span>, <span class="c-green">"Real-Time"</span>],<br>
+            &nbsp;&nbsp;languages: [<span class="c-green">"C#"</span>, <span class="c-green">"TypeScript"</span>],<br>
+            &nbsp;&nbsp;latest: <span class="c-yellow">"Intern @ SpaceTech"</span>,<br>
+            &nbsp;&nbsp;hardWorker: <span class="c-purple">true</span>,<br>
+            &nbsp;&nbsp;coffee: <span class="c-purple">Infinity</span><br>
+            };
+          </div>
         </div>
-    </nav>
-
-    <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
-        <div class="max-w-4xl text-center">
-            <p class="text-primary font-semibold mb-4 animate-fade-in">Hello, I'm</p>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">Fathy Ali</h1>
-            <div class="text-2xl md:text-3xl text-slate-300 mb-8 h-10">
-                I build 
-                <span id="typing-text" class="text-white font-bold"></span>
-                <span class="typing-cursor"></span>
-            </div>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-10 reveal">
-                Full-Stack .NET Developer specializing in ASP.NET Core, Angular, and Blazor. I craft scalable architectures, real-time systems, and AI-integrated web applications.
-            </p>
-            <div class="flex justify-center gap-4 reveal">
-                <a href="#projects" class="px-8 py-3 bg-primary hover:bg-secondary rounded-full text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-primary/30">View Projects</a>
-                <a href="https://raw.githubusercontent.com/fathyali11/Portfolio/main/Fathy_Ali_FullStack_Developer.pdf" download class="px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-white rounded-full font-semibold transition-all hover:scale-105">Download CV</a>
-            </div>
-            <div class="flex justify-center gap-6 mt-12 text-2xl text-slate-400 reveal">
-                <a href="https://linkedin.com/in/fathy-ali-fullstack" target="_blank" class="hover:text-primary transition hover:scale-125"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/fathyali11" target="_blank" class="hover:text-primary transition hover:scale-125"><i class="fab fa-github"></i></a>
-                <a href="mailto:fathy.ali8ali@gmail.com"  class="hover:text-primary transition hover:scale-125"><i class="fas fa-envelope"></i></a>
-            </div>
+      </div>
+      <div class="reveal right about-text">
+        <p>Full-Stack .NET Developer building web applications with <span class="accent-c">ASP.NET Core, Angular, and Blazor</span>. Recently completed a .NET internship at <span class="accent-p">SpaceTech</span>, and now levelling up in microservices &amp; distributed systems.</p>
+        <p>I'm hands-on with <span class="accent-c">Clean Architecture</span>, <span class="accent-c">CQRS</span>, and real-time systems using <span class="accent-p">SignalR</span> — and I ship freelance projects that solve real problems.</p>
+        <div class="stats">
+          <div class="stat"><div class="num p counter" data-target="5">0+</div><div class="lbl">Major Projects</div></div>
+          <div class="stat"><div class="num c counter" data-target="15">0+</div><div class="lbl">Technologies</div></div>
+          <div class="stat"><div class="num p counter" data-target="2">0+</div><div class="lbl">Years Building</div></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="about" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 reveal">About <span class="gradient-text">Me</span></h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="reveal">
-                    <div class="w-64 h-64 mx-auto rounded-full animate-float">
-                        <div class="w-full h-full rounded-full overflow-hidden">
-                            <img src="me.jpeg" alt="Fathy Ali" class="w-full h-full object-cover object-top">
-                        </div>
-                    </div>
-                </div>
-                <div class="reveal">
-                    <h3 class="text-2xl font-bold mb-4 text-white">A Self-Driven Full-Stack Developer</h3>
-                    <p class="text-slate-400 leading-relaxed mb-6">
-                        I'm a Computer Engineering student at Mansoura University (Expected 2026) with hands-on experience building production-grade web applications. I love designing scalable architectures using Clean Architecture and CQRS, and implementing real-time features with SignalR.
-                    </p>
-                    <p class="text-slate-400 leading-relaxed mb-6">
-                        Recently, I've been diving deep into AI integrations, building tools like the CV Analyzer using LLMs, and optimizing performance with .NET HybridCache. I'm always eager to contribute to high-impact teams.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="glass p-4 rounded-lg text-center hover:scale-105 transition">
-                            <p class="text-3xl font-bold text-primary">4+</p>
-                            <p class="text-slate-400 text-sm">Production Projects</p>
-                        </div>
-                        <div class="glass p-4 rounded-lg text-center hover:scale-105 transition">
-                            <p class="text-3xl font-bold text-primary">Excellent</p>
-                            <p class="text-slate-400 text-sm">Academic Grade</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">// 02. My Arsenal</span>
+      <h2 class="section-title gradient-text">Technical Skills</h2>
+    </div>
+
+    <div class="skill-bars">
+      <div class="skill-bar-row reveal" data-level="95">
+        <div class="top"><span>C# / .NET Core</span><span class="pct">95%</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      </div>
+      <div class="skill-bar-row reveal" data-level="85">
+        <div class="top"><span>Blazor / Angular</span><span class="pct">85%</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      </div>
+      <div class="skill-bar-row reveal" data-level="80">
+        <div class="top"><span>SQL / PostgreSQL</span><span class="pct">80%</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      </div>
+      <div class="skill-bar-row reveal" data-level="75">
+        <div class="top"><span>Azure / Docker / CI-CD</span><span class="pct">75%</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-grid">
+      <div class="glow-card skill-item reveal"><span class="icon">🟣</span><b>ASP.NET Core</b><div class="sub">Web API · MVC</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon ic">⚡</span><b>SignalR</b><div class="sub">Real-Time Systems</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon ir">🅰</span><b>Angular</b><div class="sub">Signals · PWA</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon ip">🧩</span><b>Microservices</b><div class="sub">Distributed Systems</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon ic">🗄</span><b>SQL Server</b><div class="sub">PostgreSQL · Neon</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon ib">🐳</span><b>Docker</b><div class="sub">CI/CD Pipelines</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon io">⑂</span><b>Git &amp; GitHub</b><div class="sub">Copilot · Actions</div></div>
+      <div class="glow-card skill-item reveal"><span class="icon ip">☁</span><b>Azure</b><div class="sub">Cloud Services</div></div>
+    </div>
+
+    <div class="chips-row reveal">
+      <span class="chip mono">CQRS / MediatR</span>
+      <span class="chip mono">Clean Architecture</span>
+      <span class="chip mono">TypeScript</span>
+      <span class="chip mono">RESTful APIs</span>
+      <span class="chip mono">Hangfire</span>
+      <span class="chip mono">Stripe Payments</span>
+      <span class="chip mono">ML.NET</span>
+      <span class="chip mono">HybridCache</span>
+      <span class="chip mono">Unit Testing</span>
+      <span class="chip mono">Rate Limiting</span>
+      <span class="chip mono">Vercel</span>
+      <span class="chip mono">Postman</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">// 03. Featured Work</span>
+      <h2 class="section-title gradient-text">Projects That Ship</h2>
+    </div>
+
+    <!-- P1 — Roshetta (Aug 2026) -->
+    <div class="glow-card tilt-card project reveal grid-2">
+      <div>
+        <div class="proj-head"><span class="icon ip">📋</span><h3>Roshetta — E-Prescription PWA</h3></div>
+        <div class="date-pill" style="display:inline-block; margin-bottom:14px;">Aug 2026</div>
+        <p>Offline-first <span class="accent-c">Progressive Web App</span> enabling doctors to write, manage &amp; print digital prescriptions with a dynamic drug suggestion system. Uses <span class="accent-p">IndexedDB</span> for secure local persistence — works flawlessly with no internet.</p>
+        <div class="tags mono">
+          <span class="tag p">Blazor WASM</span><span class="tag c">PWA</span>
+          <span class="tag p">IndexedDB</span>
         </div>
-    </section>
-
-    <section id="skills" class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 reveal">My <span class="gradient-text">Tech Stack</span></h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-2xl reveal hover:border-primary transition">
-                    <div class="text-4xl text-primary mb-4"><i class="fas fa-server"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Backend</h3>
-                    <ul class="space-y-2 text-slate-400">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> ASP.NET Core / MVC</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> RESTful Web APIs</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> SignalR (Real-Time)</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> Clean Arch & CQRS</li>
-                    </ul>
-                </div>
-                <div class="glass p-8 rounded-2xl reveal hover:border-secondary transition">
-                    <div class="text-4xl text-secondary mb-4"><i class="fas fa-laptop-code"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Frontend</h3>
-                    <ul class="space-y-2 text-slate-400">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> Angular & Blazor WASM</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> TypeScript / JavaScript</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> Tailwind CSS / Bootstrap</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> HTML5 / CSS3</li>
-                    </ul>
-                </div>
-                <div class="glass p-8 rounded-2xl reveal hover:border-pink-500 transition">
-                    <div class="text-4xl text-pink-500 mb-4"><i class="fas fa-cloud"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Cloud & Database</h3>
-                    <ul class="space-y-2 text-slate-400">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> Microsoft Azure</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> SQL Server / PostgreSQL</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> Docker & CI/CD</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500 text-xs"></i> AI APIs / LLMs</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="proj-actions">
+          <a href="https://roshettaa.runasp.net" target="_blank" class="btn btn-primary btn-sm">↗ Live Demo</a>
+          <span class="status-badge">✔ Delivered</span>
         </div>
-    </section>
+      </div>
+      <div class="proj-icon-wrap"><span class="big-icon float">💊</span></div>
+    </div>
 
-    <section id="projects" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 reveal">Featured <span class="gradient-text">Projects</span></h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                
-                <div class="project-card glass p-6 rounded-2xl reveal">
-                    <div class="h-40 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl mb-6 flex items-center justify-center text-5xl text-white/50">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-2xl font-bold text-white">Live Auction System</h3>
-                        <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">Real-Time</span>
-                    </div>
-                    <p class="text-slate-400 mb-4 text-sm">Real-time bidding platform using .NET 10, Blazor WASM, and SignalR. Prevents race conditions and automates fund transfers.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">.NET 10</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">Blazor</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">SignalR</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">CQRS</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="https://liveauction.runasp.net" target="_blank" class="text-primary hover:text-white transition flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Live</a>
-                        <a href="https://github.com/fathyali11/LiveAuction" target="_blank" class="text-slate-400 hover:text-white transition flex items-center gap-1"><i class="fab fa-github"></i> Code</a>
-                    </div>
-                </div>
-
-                <div class="project-card glass p-6 rounded-2xl reveal">
-                    <div class="h-40 bg-gradient-to-br from-pink-600 to-rose-600 rounded-xl mb-6 flex items-center justify-center text-5xl text-white/50">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-2xl font-bold text-white">CV Analyzer</h3>
-                        <span class="text-xs bg-pink-500/20 text-pink-500 px-3 py-1 rounded-full">AI Powered</span>
-                    </div>
-                    <p class="text-slate-400 mb-4 text-sm">AI resume grading platform evaluating PDFs against job descriptions using LLMs (Llama 3.3, Gemini) with HybridCache optimization.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">.NET 10</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">Angular</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">LLMs</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">PostgreSQL</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="https://cv-analyzer-ui.vercel.app" target="_blank" class="text-primary hover:text-white transition flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Live</a>
-                        <a href="https://github.com/fathyali11/CVAnalyzerUI" target="_blank" class="text-slate-400 hover:text-white transition flex items-center gap-1"><i class="fab fa-github"></i> Frontend</a>
-                         <a href="https://github.com/fathyali11/CVAnalyzerAPI" target="_blank" class="text-slate-400 hover:text-white transition flex items-center gap-1"><i class="fab fa-github"></i> Backend</a>
-                    </div>
-                </div>
-
-                <div class="project-card glass p-6 rounded-2xl reveal">
-                    <div class="h-40 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl mb-6 flex items-center justify-center text-5xl text-white/50">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-2xl font-bold text-white">WearUp E-Commerce</h3>
-                        <span class="text-xs bg-emerald-500/20 text-emerald-500 px-3 py-1 rounded-full">ML.NET</span>
-                    </div>
-                    <p class="text-slate-400 mb-4 text-sm">Scalable e-commerce platform with AI recommendations, Stripe payments, Google OAuth, and automated background tasks via Hangfire.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">ASP.NET MVC</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">ML.NET</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">Stripe</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="https://wearup.runasp.net" target="_blank" class="text-primary hover:text-white transition flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Live</a>
-                        <a href="https://github.com/fathyali11/WearUp" target="_blank" class="text-slate-400 hover:text-white transition flex items-center gap-1"><i class="fab fa-github"></i> Code</a>
-                    </div>
-                </div>
-
-                <div class="project-card glass p-6 rounded-2xl reveal">
-                    <div class="h-40 bg-gradient-to-br from-amber-600 to-orange-600 rounded-xl mb-6 flex items-center justify-center text-5xl text-white/50">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-2xl font-bold text-white">Library Management</h3>
-                        <span class="text-xs bg-amber-500/20 text-amber-500 px-3 py-1 rounded-full">Enterprise</span>
-                    </div>
-                    <p class="text-slate-400 mb-4 text-sm">Comprehensive platform for book borrowing/purchasing with secure payment gateways, Hybrid Caching, and real-time notifications.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">.NET Core</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">SQL Server</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded">Rate Limiting</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="https://github.com/fathyali11/LibrarySystemWeb" target="_blank" class="text-slate-400 hover:text-white transition flex items-center gap-1"><i class="fab fa-github"></i> Code</a>
-                    </div>
-                </div>
-
-            </div>
+    <!-- P2 — CV Analyzer (Apr 2026) -->
+    <div class="glow-card tilt-card project reveal grid-2">
+      <div class="proj-icon-wrap"><span class="big-icon float">📄</span></div>
+      <div>
+        <div class="proj-head"><span class="icon ip">🧠</span><h3>CV Analyzer — AI Resume Grader</h3></div>
+        <div class="date-pill" style="display:inline-block; margin-bottom:14px;">Apr 2026</div>
+        <p>AI-powered resume grading platform using <span class="accent-c">LLMs (Llama 3.3 &amp; Gemini)</span>. Extracts PDF text via PdfPig, optimized with <span class="accent-p">HybridCache</span> to bypass API limits and secured with a Sliding Window Rate Limiter.</p>
+        <div class="tags mono">
+          <span class="tag p">.NET 10</span><span class="tag c">Angular</span>
+          <span class="tag p">LLMs</span><span class="tag c">PostgreSQL</span>
         </div>
-    </section>
-
-    <section id="contact" class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-6 reveal">Let's Work <span class="gradient-text">Together</span></h2>
-            <p class="text-slate-400 mb-10 reveal">I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my inbox is always open!</p>
-            
-            <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <a href="mailto:fathy.ali8ali@gmail.com" class="glass p-6 rounded-2xl hover:scale-105 transition reveal group">
-                    <i class="fas fa-envelope text-3xl text-primary mb-3 group-hover:animate-bounce"></i>
-                    <p class="text-slate-400 text-sm">Email Me</p>
-                    <p class="text-white font-semibold">fathy.ali8ali@gmail.com</p>
-                </a>
-                <a href="tel:+201009927286" class="glass p-6 rounded-2xl hover:scale-105 transition reveal group">
-                    <i class="fas fa-phone text-3xl text-secondary mb-3 group-hover:animate-bounce"></i>
-                    <p class="text-slate-400 text-sm">Call Me</p>
-                    <p class="text-white font-semibold">+20 100 992 7286</p>
-                </a>
-                <a href="https://linkedin.com/in/fathy-ali-fullstack" target="_blank" class="glass p-6 rounded-2xl hover:scale-105 transition reveal group">
-                    <i class="fab fa-linkedin text-3xl text-blue-500 mb-3 group-hover:animate-bounce"></i>
-                    <p class="text-slate-400 text-sm">LinkedIn</p>
-                    <p class="text-white font-semibold">Fathy Ali</p>
-                </a>
-            </div>
+        <div class="proj-actions">
+          <a href="https://cv-analyzer-ui.vercel.app" target="_blank" class="btn btn-primary btn-sm">↗ Live Demo</a>
+          <a href="https://github.com/fathyali11/CVAnalyzerAPI" target="_blank" class="btn btn-outline btn-sm">&lt;/&gt; API</a>
+          <a href="https://github.com/fathyali11/CVAnalyzerUI" target="_blank" class="btn btn-outline btn-sm">&lt;/&gt; UI</a>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <footer class="py-8 text-center text-slate-500 border-t border-slate-800">
-        <p>Designed & Built by <span class="gradient-text font-bold">Fathy Ali</span> &copy; 2026</p>
-    </footer>
+    <!-- P3 — Live Auction (Dec 2025 – Jan 2026) -->
+    <div class="glow-card tilt-card project reveal grid-2">
+      <div>
+        <div class="proj-head"><span class="icon ic">🔨</span><h3>Live Auction System</h3></div>
+        <div class="date-pill" style="display:inline-block; margin-bottom:14px;">Dec 2025 — Jan 2026</div>
+        <p>Real-time bidding platform engineered with <span class="accent-c">Clean Architecture</span> &amp; <span class="accent-p">CQRS with MediatR</span>. Ensures bid consistency and prevents race conditions via database transactions — with automated auction finalization via background jobs.</p>
+        <div class="tags mono">
+          <span class="tag p">.NET 10</span><span class="tag c">SignalR</span>
+          <span class="tag p">Blazor WASM</span><span class="tag c">Background Jobs</span>
+        </div>
+        <div class="proj-actions">
+          <a href="https://liveauction.runasp.net" target="_blank" class="btn btn-primary btn-sm">↗ Live Demo</a>
+          <a href="https://github.com/fathyali11/LiveAuction" target="_blank" class="btn btn-outline btn-sm">&lt;/&gt; Code</a>
+        </div>
+      </div>
+      <div class="proj-icon-wrap"><span class="big-icon float">🔨</span></div>
+    </div>
 
-    <script>
-        const texts = ["Scalable .NET APIs", "Real-Time Blazor Apps", "AI-Integrated Systems", "Clean Architecture"];
-        let count = 0;
-        let index = 0;
-        let currentText = '';
-        let letter = '';
+    <!-- P4 — WearUp (Aug 2024 – Sep 2024) -->
+    <div class="glow-card tilt-card project reveal grid-2">
+      <div class="proj-icon-wrap"><span class="big-icon float">🛍</span></div>
+      <div>
+        <div class="proj-head"><span class="icon ic">🛒</span><h3>WearUp — E-Commerce Platform</h3></div>
+        <div class="date-pill" style="display:inline-block; margin-bottom:14px;">Aug 2024 — Sep 2024</div>
+        <p>Scalable e-commerce platform with <span class="accent-p">N-Tier Architecture</span>, integrating <span class="accent-c">ML.NET for AI recommendations</span>, Stripe payments, Google OAuth, and automated background tasks via Hangfire with CI/CD deployment.</p>
+        <div class="tags mono">
+          <span class="tag p">ASP.NET MVC</span><span class="tag c">ML.NET</span>
+          <span class="tag p">Hangfire</span><span class="tag c">Stripe</span>
+        </div>
+        <div class="proj-actions">
+          <a href="https://wearup.runasp.net" target="_blank" class="btn btn-primary btn-sm">↗ Live Demo</a>
+          <a href="https://github.com/fathyali11/WearUp" target="_blank" class="btn btn-outline btn-sm">&lt;/&gt; Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        (function type() {
-            if (count === texts.length) {
-                count = 0;
-            }
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="container" style="max-width: 800px;">
+    <div class="section-head reveal">
+      <span class="section-tag">// 04. The Journey</span>
+      <h2 class="section-title gradient-text">Experience &amp; Education</h2>
+    </div>
 
-            document.getElementById('typing-text').textContent = letter;
-            if (letter.length === currentText.length) {
-                count++;
-                index = 0;
-                setTimeout(type, 2000);
-            } else {
-                setTimeout(type, 100);
-            }
-        }());
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <span class="tl-dot purple"></span>
+        <div class="glow-card tl-card">
+          <div class="tl-top"><h3>.NET Developer Intern</h3><span class="date-pill">Sep 2026 — Oct 2026</span></div>
+          <div class="tl-place">SpaceTech — Alexandria, Egypt</div>
+          <p>Developed backend features from the ground up using ASP.NET Core for an educational platform, collaborating with the team through structured business and product sessions. Used Jira for task tracking and sprint management, coordinating with cross-functional team members to align technical work with product requirements.</p>
+        </div>
+      </div>
 
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
+      <div class="tl-item reveal">
+        <span class="tl-dot cyan"></span>
+        <div class="glow-card tl-card">
+          <div class="tl-top"><h3>Freelance .NET Developer</h3><span class="date-pill">Aug 2026 — Present</span></div>
+          <div class="tl-place">Self-Employed — Remote</div>
+          <p>Gathered requirements from a medical client and delivered a custom electronic prescription platform (Roshetta) as a fully functional Progressive Web App.</p>
+        </div>
+      </div>
 
-        reveals.forEach(el => observer.observe(el));
+      <div class="tl-item reveal">
+        <span class="tl-dot purple"></span>
+        <div class="glow-card tl-card">
+          <div class="tl-top"><h3>Web Development Using .NET</h3><span class="date-pill">ITI — Summer Training</span></div>
+          <div class="tl-place">Information Technology Institute</div>
+          <p>Intensive summer training program in professional web development with the .NET ecosystem.</p>
+        </div>
+      </div>
 
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-lg', 'shadow-black/20');
-            } else {
-                nav.classList.remove('shadow-lg', 'shadow-black/20');
-            }
-        });
-    </script>
+      <div class="tl-item reveal">
+        <span class="tl-dot cyan"></span>
+        <div class="glow-card tl-card">
+          <div class="tl-top"><h3>B.Sc. Computer Engineering</h3><span class="date-pill">2021 — 2026</span></div>
+          <div class="tl-place">Faculty of Engineering, Mansoura University</div>
+          <p>Cumulative Grade: <span class="honors">Excellent with Honors</span> — Graduation Project: <span class="honors">Excellent with Honors</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="extras reveal">
+      <div class="glow-card extra-card">
+        <span class="icon iy">🏆</span>
+        <div><div class="t1">ASP.NET Core 8 Web API</div><div class="t2">Clean Architecture &amp; Azure — Udemy, 2025</div></div>
+      </div>
+      <div class="glow-card extra-card">
+        <span class="icon ic">🗣</span>
+        <div><div class="t1">Arabic — Native</div><div class="t2">English — Fluent</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="container" style="max-width: 800px; text-align: center;">
+    <div class="reveal">
+      <span class="section-tag">// 05. Say Hello</span>
+      <h2 class="section-title gradient-text">Let's Build Something<br>Amazing Together</h2>
+      <p style="color: var(--muted); margin-top: 16px;">Looking for a developer who ships production-grade software? My inbox is always open — let's talk.</p>
+    </div>
+
+    <div class="contact-cards reveal">
+      <a href="/cdn-cgi/l/email-protection#2a4c4b5e4253044b4643124b46430c091c1e114d474b434604494547" class="glow-card contact-pill">✉ fathy.ali8ali&#64;gmail.com</a>
+      <a href="tel:+201009927286" class="glow-card contact-pill">📞 +20 100 992 7286</a>
+      <span class="glow-card contact-pill">📍 Mansoura, Egypt</span>
+    </div>
+
+    <div class="contact-socials reveal">
+      <a href="https://github.com/fathyali11" target="_blank" class="glow-card soc" title="GitHub">GH</a>
+      <a href="https://linkedin.com/in/fathy-ali-fullstack" target="_blank" class="glow-card soc" title="LinkedIn">in</a>
+      <a href="/cdn-cgi/l/email-protection#385e594c504116595451005954511e1b0e0c035f55595154165b5755" class="glow-card soc" title="Email">✉</a>
+      <a href="tel:+201009927286" class="glow-card soc" title="Phone">📞</a>
+      <a href="https://fathyali11.github.io/Portfolio/" target="_blank" class="glow-card soc" title="Portfolio">🌐</a>
+    </div>
+
+    <!-- Big visible email -->
+    <div class="reveal" style="margin-top: 60px;">
+      <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 14px;">Or drop me a line directly at:</p>
+      <a href="/cdn-cgi/l/email-protection#2c4a4d584455024d4045144d40450a0f1a18174b414d4540024f4341" class="email-big mono" title="Send me an email">fathy.ali8ali&#64;gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>Designed &amp; Built by <b class="gradient-text">Fathy Ali</b> © 2026</span>
+    <span>Powered by <span style="color: var(--purple);">ASP.NET Core</span> energy ⚡</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ===== Particles ===== */
+(function () {
+  var canvas = document.getElementById('particles');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  for (var i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 0.5,
+      dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4,
+      c: Math.random() > 0.5 ? '124,58,237' : '6,182,212',
+      a: Math.random() * 0.5 + 0.2
+    });
+  }
+  (function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + p.c + ',' + p.a + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ===== Hero name letter animation ===== */
+(function () {
+  var el = document.getElementById('heroName');
+  var name = 'Fathy Ali';
+  for (var i = 0; i < name.length; i++) {
+    var span = document.createElement('span');
+    span.className = 'letter';
+    span.textContent = name[i] === ' ' ? '\u00A0' : name[i];
+    span.style.animationDelay = (0.3 + i * 0.05) + 's';
+    el.appendChild(span);
+  }
+})();
+
+/* ===== Typewriter ===== */
+(function () {
+  var roles = ['Full-Stack .NET Developer', 'Angular & Blazor Expert', 'Microservices Enthusiast', 'Real-Time Systems Builder'];
+  var el = document.getElementById('typewriter');
+  var ri = 0, ci = 0, del = false;
+  function tick() {
+    var role = roles[ri];
+    el.textContent = role.slice(0, ci);
+    if (!del && ci < role.length) { ci++; setTimeout(tick, 70); }
+    else if (!del) { del = true; setTimeout(tick, 1800); }
+    else if (ci > 0) { ci--; setTimeout(tick, 35); }
+    else { del = false; ri = (ri + 1) % roles.length; setTimeout(tick, 400); }
+  }
+  setTimeout(tick, 1400);
+})();
+
+/* ===== Scroll reveal ===== */
+(function () {
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+})();
+
+/* ===== Skill bars ===== */
+(function () {
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.querySelector('.bar-fill').style.width = e.target.dataset.level + '%';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.skill-bar-row').forEach(function (el) { observer.observe(el); });
+})();
+
+/* ===== Counters ===== */
+(function () {
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var el = e.target, target = parseInt(el.dataset.target, 10), cur = 0;
+        var step = Math.max(1, Math.ceil(target / 50));
+        var timer = setInterval(function () {
+          cur += step;
+          if (cur >= target) { cur = target; clearInterval(timer); }
+          el.textContent = cur + '+';
+        }, 30);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(function (el) { observer.observe(el); });
+})();
+
+/* ===== Tilt effect ===== */
+document.querySelectorAll('.tilt-card').forEach(function (card) {
+  card.addEventListener('mousemove', function (e) {
+    var r = card.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width - 0.5;
+    var y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = 'perspective(1000px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg)';
+  });
+  card.addEventListener('mouseleave', function () {
+    card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
+  });
+});
+
+/* ===== Mobile menu ===== */
+(function () {
+  var btn = document.getElementById('menuBtn');
+  var menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', function () {
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { menu.style.display = 'none'; });
+  });
+})();
+</script>
 </body>
 </html>
