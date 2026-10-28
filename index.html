@@ -20,6 +20,9 @@
 
   html { scroll-behavior: smooth; }
 
+  /* Offset for fixed nav when jumping to sections */
+  section[id] { scroll-margin-top: 70px; }
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -388,7 +391,7 @@
     <div class="socials">
       <a href="https://github.com/fathyali11" target="_blank" title="GitHub">⌥</a>
       <a href="https://linkedin.com/in/fathy-ali-fullstack" target="_blank" title="LinkedIn">in</a>
-      <a href="/cdn-cgi/l/email-protection#5d3b3c293524733c3134653c31347b7e6b69663a303c3431733e3230" title="Email">✉</a>
+      <a href="/cdn-cgi/l/email-protection#cea8afbaa6b7e0afa2a7f6afa2a7e8edf8faf5a9a3afa7a2e0ada1a3" title="Email">✉</a>
     </div>
   </div>
   <div class="scroll-mouse"></div>
@@ -639,7 +642,7 @@
     </div>
 
     <div class="contact-cards reveal">
-      <a href="/cdn-cgi/l/email-protection#2a4c4b5e4253044b4643124b46430c091c1e114d474b434604494547" class="glow-card contact-pill">✉ fathy.ali8ali&#64;gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#c8aea9bca0b1e6a9a4a1f0a9a4a1eeebfefcf3afa5a9a1a4e6aba7a5" class="glow-card contact-pill">✉ fathy.ali8ali&#64;gmail.com</a>
       <a href="tel:+201009927286" class="glow-card contact-pill">📞 +20 100 992 7286</a>
       <span class="glow-card contact-pill">📍 Mansoura, Egypt</span>
     </div>
@@ -647,7 +650,7 @@
     <div class="contact-socials reveal">
       <a href="https://github.com/fathyali11" target="_blank" class="glow-card soc" title="GitHub">GH</a>
       <a href="https://linkedin.com/in/fathy-ali-fullstack" target="_blank" class="glow-card soc" title="LinkedIn">in</a>
-      <a href="/cdn-cgi/l/email-protection#385e594c504116595451005954511e1b0e0c035f55595154165b5755" class="glow-card soc" title="Email">✉</a>
+      <a href="/cdn-cgi/l/email-protection#0167607569782f606d6839606d68272237353a666c60686d2f626e6c" class="glow-card soc" title="Email">✉</a>
       <a href="tel:+201009927286" class="glow-card soc" title="Phone">📞</a>
       <a href="https://fathyali11.github.io/Portfolio/" target="_blank" class="glow-card soc" title="Portfolio">🌐</a>
     </div>
@@ -655,7 +658,7 @@
     <!-- Big visible email -->
     <div class="reveal" style="margin-top: 60px;">
       <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 14px;">Or drop me a line directly at:</p>
-      <a href="/cdn-cgi/l/email-protection#2c4a4d584455024d4045144d40450a0f1a18174b414d4540024f4341" class="email-big mono" title="Send me an email">fathy.ali8ali&#64;gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#6e080f1a0617400f0207560f0207484d585a5509030f0702400d0103" class="email-big mono" title="Send me an email">fathy.ali8ali&#64;gmail.com</a>
     </div>
   </div>
 </section>
@@ -787,6 +790,24 @@ document.querySelectorAll('.tilt-card').forEach(function (card) {
     card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
   });
 });
+
+/* ===== Smooth in-page scrolling — never opens a new page ===== */
+(function () {
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id.length > 1) {
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();           /* stop any default/new-page behavior */
+          e.stopPropagation();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (history.replaceState) history.replaceState(null, '', id);
+        }
+      }
+    });
+  });
+})();
 
 /* ===== Mobile menu ===== */
 (function () {
